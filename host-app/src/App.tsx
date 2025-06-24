@@ -1,35 +1,9 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom'
+import ErrorBoundary from './ErrorBoundary';
 
 const Home = React.lazy(() => import('./Home'));
 const About = React.lazy(() => import('./About'));
-
-interface ErrorBoundaryState {
-  hasError: boolean;
-}
-
-class ErrorBoundary extends React.Component<React.PropsWithChildren<{}>, ErrorBoundaryState> {
-  constructor(props: React.PropsWithChildren<{}>) {
-    super(props);
-    this.state = { hasError: false };
-  }
-
-  static getDerivedStateFromError(error) {
-    return { hasError: true };
-  }
-
-  componentDidCatch(error, errorInfo) {
-    console.error('ErrorBoundary caught an error', error, errorInfo);
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return <h1>Something went wrong.</h1>;
-    }
-
-    return this.props.children;
-  }
-}
 
 export default function App() {
   return (
