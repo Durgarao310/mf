@@ -1,23 +1,18 @@
 {
-  "name": "host-app",
+  "name": "ui-remote",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "rspack serve --config configs/rspack.dev.js",
-    "serve": "rspack serve --config configs/rspack.dev.js",
-    "build": "rspack --config configs/rspack.prod.js",
-    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
-    "prod": "npm run build && npx serve dist"
+    "dev": "rspack serve --config configs/rspack.dev.js"
   },
   "keywords": [],
-  "author": "Durgarao G",
+  "author": "",
   "license": "ISC",
   "type": "commonjs",
+  "description": "",
   "dependencies": {
     "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-router-dom": "^7.6.2"
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@rspack/cli": "^1.3.15",

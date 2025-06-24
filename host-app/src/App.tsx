@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom'
 import ErrorBoundary from './ErrorBoundary';
+const RemoteButton = React.lazy(() => import("ui_remote/Button"));
 
 const Home = React.lazy(() => import('./Home'));
 const About = React.lazy(() => import('./About'));
@@ -9,6 +10,7 @@ export default function App() {
   return (
     <ErrorBoundary>
       <BrowserRouter>
+        <RemoteButton label="Click Me"  onClick={() => alert('Button Clicked!')} />
         <nav className="flex gap-4 justify-center my-4">
           <Link to="/" className="text-blue-600 hover:underline">Home</Link>
           <Link to="/about" className="text-green-600 hover:underline">About</Link>

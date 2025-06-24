@@ -1,5 +1,3 @@
-// dev configuration for rspack
-
 const path = require("path")
 const { merge } = require("webpack-merge")
 const rspackBaseConfig = require("./rspack.base")
@@ -15,11 +13,14 @@ const devConfig = {
         static: {
             directory: path.join(__dirname, "../dist"),
         },
-        port: 3000,
+        port: 3001,
         hot: true,
         compress: false,
         historyApiFallback: true,
         open: false
+    },
+    output: {
+        publicPath: "http://localhost:3001/",
     },
 }
 

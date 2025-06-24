@@ -1,5 +1,3 @@
-// base configuration for rspack
-
 const path = require("path")
 const rspack = require("@rspack/core")
 
@@ -11,8 +9,8 @@ module.exports = {
 		main: path.join(__dirname, "../src/main.tsx"),
 	},
 	output: {
-		publicPath: "http://localhost:3000/",
-		uniqueName: "host_app",
+		publicPath: "http://localhost:3001/",
+		uniqueName: "ui_remote", // helpful for shared scope uniqueness
 	},
 	mode: "development",
 	target: "web",
@@ -54,10 +52,10 @@ module.exports = {
 			template: path.join(__dirname, "../index.html"),
 		}),
 		new rspack.container.ModuleFederationPlugin({
-			name: "host_app",
-			exposes: {},
-			remotes: {
-				ui_remote: "ui_remote@http://localhost:3001/remoteEntry.js",
+			name: "ui_remote",
+			filename: "remoteEntry.js",
+			exposes: {
+				"./Button": "./src/components/Button",
 			},
 			shared: {
 				react: { singleton: true, eager: true, requiredVersion: false },
@@ -65,7 +63,7 @@ module.exports = {
 				tailwindcss: { singleton: true, eager: true, requiredVersion: false },
 				'postcss-loader': { singleton: true, eager: true, requiredVersion: false },
 			},
-		})	,
+		}),
 	],
 	optimization: {
 		minimizer: [
