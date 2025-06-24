@@ -60,8 +60,6 @@ module.exports = {
 			shared: {
 				react: { singleton: true, eager: true, requiredVersion: false },
 				'react-dom': { singleton: true, eager: true, requiredVersion: false },
-				tailwindcss: { singleton: true, eager: true, requiredVersion: false },
-				'postcss-loader': { singleton: true, eager: true, requiredVersion: false },
 			},
 		}),
 	],
