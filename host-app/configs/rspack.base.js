@@ -2,6 +2,7 @@
 
 const path = require("path")
 const rspack = require("@rspack/core")
+const { ModuleFederationPlugin } = require('@module-federation/enhanced/rspack');
 
 // Target browsers, see: https://github.com/browserslist/browserslist
 const targets = ["chrome >= 87", "edge >= 88", "firefox >= 78", "safari >= 14"]
@@ -42,18 +43,20 @@ module.exports = {
 				},
 				exclude: /node_modules/,
 			},
-			{
-				test: /\.css$/,
-				use: ["postcss-loader"],
-				type: "css",
-			},
+			// {
+			// 	test: /\.css$/,
+			// 	use: ["postcss-loader"],
+			// 	type: "css",
+			// },
+
+
 		],
 	},
 	plugins: [
 		new rspack.HtmlRspackPlugin({
 			template: path.join(__dirname, "../index.html"),
 		}),
-		new rspack.container.ModuleFederationPlugin({
+		new ModuleFederationPlugin({
 			name: "host_app",
 			exposes: {},
 			remotes: {

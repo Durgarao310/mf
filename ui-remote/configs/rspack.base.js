@@ -1,5 +1,6 @@
 const path = require("path")
 const rspack = require("@rspack/core")
+const { ModuleFederationPlugin } = require("@module-federation/enhanced/rspack")
 
 // Target browsers, see: https://github.com/browserslist/browserslist
 const targets = ["chrome >= 87", "edge >= 88", "firefox >= 78", "safari >= 14"]
@@ -35,15 +36,22 @@ module.exports = {
 									runtime: "automatic",
 								},
 							},
+							externalHelpers: true,
 						},
+						// Enable styled-components transform manually
+						plugin: [
+							[
+								"@swc/plugin-styled-components",
+								{
+									displayName: true,
+									fileName: true,
+									pure: true,
+								},
+							],
+						],
 					},
 				},
 				exclude: /node_modules/,
-			},
-			{
-				test: /\.css$/,
-				use: ["postcss-loader"],
-				type: "css",
 			},
 		],
 	},
@@ -51,7 +59,7 @@ module.exports = {
 		new rspack.HtmlRspackPlugin({
 			template: path.join(__dirname, "../index.html"),
 		}),
-		new rspack.container.ModuleFederationPlugin({
+		new ModuleFederationPlugin({
 			name: "ui_remote",
 			filename: "remoteEntry.js",
 			exposes: {
@@ -59,7 +67,7 @@ module.exports = {
 			},
 			shared: {
 				react: { singleton: true, eager: true, requiredVersion: false },
-				'react-dom': { singleton: true, eager: true, requiredVersion: false },
+				"react-dom": { singleton: true, eager: true, requiredVersion: false },
 			},
 		}),
 	],

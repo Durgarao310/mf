@@ -1,10 +1,10 @@
-import React, { Suspense } from 'react';
-
+import './index.css';
+import Button from './components/Button';
 
 export default function App() {
     return (
         <div>
-            hello world
+            <Button onClick={() => alert('Button clicked!')} label='Hello World' />
         </div>
     );
 }
