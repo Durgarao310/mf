@@ -1,0 +1,138 @@
+// Material Design Mixins
+@import './variables.scss';
+
+// Elevation Mixin
+@mixin elevation($level: 1) {
+  @if $level == 1 {
+    box-shadow: var(--md-elevation-1);
+  } @else if $level == 2 {
+    box-shadow: var(--md-elevation-2);
+  } @else if $level == 3 {
+    box-shadow: var(--md-elevation-3);
+  }
+}
+
+// Focus Ring Mixin
+@mixin focus-ring($color: var(--md-primary-color)) {
+  outline: 2px solid $color;
+  outline-offset: 2px;
+}
+
+// Ripple Effect Mixin
+@mixin ripple-effect() {
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+  
+  &:active::before {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+// Material Design Input Field Base
+@mixin md-input-base() {
+  font-family: var(--md-font-family);
+  font-size: var(--md-font-size-base);
+  line-height: 1.5;
+  color: var(--md-on-surface);
+  background-color: var(--md-surface);
+  border: 1px solid var(--md-outline-variant);
+  border-radius: var(--md-border-radius-sm);
+  padding: var(--md-spacing-md);
+  transition: var(--md-transition-base);
+  outline: none;
+  
+  &:focus {
+    border-color: var(--md-primary-color);
+    box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
+  }
+  
+  &:disabled {
+    background-color: var(--md-surface-variant);
+    color: var(--md-on-surface-variant);
+    cursor: not-allowed;
+  }
+  
+  &.error {
+    border-color: var(--md-error);
+    
+    &:focus {
+      border-color: var(--md-error);
+      box-shadow: 0 0 0 2px rgba(186, 26, 26, 0.2);
+    }
+  }
+}
+
+// Material Design Label
+@mixin md-label() {
+  font-family: var(--md-font-family);
+  font-size: var(--md-font-size-sm);
+  font-weight: 500;
+  color: var(--md-on-surface);
+  margin-bottom: var(--md-spacing-xs);
+  display: block;
+}
+
+// Material Design Helper Text
+@mixin md-helper-text() {
+  font-family: var(--md-font-family);
+  font-size: var(--md-font-size-xs);
+  color: var(--md-on-surface-variant);
+  margin-top: var(--md-spacing-xs);
+  
+  &.error {
+    color: var(--md-error);
+  }
+}
+
+// Material Design Button Base
+@mixin md-button-base() {
+  font-family: var(--md-font-family);
+  font-size: var(--md-font-size-sm);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.0892857143em;
+  border: none;
+  border-radius: var(--md-border-radius-lg);
+  padding: var(--md-spacing-sm) var(--md-spacing-lg);
+  cursor: pointer;
+  transition: var(--md-transition-base);
+  outline: none;
+  position: relative;
+  overflow: hidden;
+  
+  &:focus-visible {
+    @include focus-ring();
+  }
+  
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+// Flexbox Utilities
+@mixin flex-center() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between() {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
