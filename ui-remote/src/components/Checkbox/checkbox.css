@@ -1,0 +1,14 @@
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  margin: 8px 0;
+  cursor: pointer;
+}
+
+.custom-checkbox input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}

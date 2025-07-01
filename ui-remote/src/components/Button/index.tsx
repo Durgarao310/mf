@@ -3,29 +3,35 @@ import './Button.css';
 
 interface ButtonProps {
   label: string;
+  classname?: string;
   onClick: () => void;
-  variant?: 'primary' | 'secondary' | 'danger' | 'outlined' | 'ghost';
+  variant?: Array<'primary' | 'secondary' | 'ghost' | 'disabled'>;
   isLoading?: boolean;
   disabled?: boolean;
 }
 
 const Button = ({
   label,
+  classname,
   onClick,
-  variant = 'primary',
+  variant = [],
   isLoading = false,
   disabled = false,
 }: ButtonProps) => {
   const isDisabled = isLoading || disabled;
 
   return (
-    <AriaButton
-      className={`styled-button ${variant} ${isLoading ? 'loading' : ''}`}
-      onPress={!isDisabled ? onClick : undefined}
-      isDisabled={isDisabled}
-    >
-      {isLoading ? 'Loading...' : label}
-    </AriaButton>
+    <div>
+      {variant?.map((v) => (
+        <AriaButton
+          className={`styled-button ${v} ${isLoading ? 'loading' : ''}`}
+          onPress={!isDisabled ? onClick : undefined}
+          isDisabled={isDisabled}
+        >
+          {isLoading ? 'Loading...' : label}
+        </AriaButton>
+      ))}
+    </div>
   );
 };
 
